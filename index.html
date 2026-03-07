@@ -1,268 +1,135 @@
 <!DOCTYPE html>
 <html class="dark" lang="zh-TW">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>ESS Manager - Login</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@48,400,0" rel="stylesheet"/>
-  <style>
-    :root {
-      --primary: #136dec;
-      --background-light: #f6f7f8;
-      --background-dark: #101822;
-      --text-primary: #1e293b;
-      --text-secondary: #64748b;
-      --text-light: #e2e8f0;
-      --white: #ffffff;
-      --border: #cbd5e1;
-    }
-    .dark {
-      --text-primary: #f1f5f9;
-      --text-secondary: #94a3b8;
-      --border: #334155;
-    }
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-    body {
-      font-family: 'Inter', sans-serif;
-      min-height: 100vh;
-      background: var(--background-light);
-      color: var(--text-primary);
-    }
-    .dark body { background: var(--background-dark); }
-    .container {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-    .header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 1rem;
-    }
-    .logo-icon {
-      width: 48px; height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--primary);
-    }
-    .logo-icon span { font-size: 32px; }
-    .company-name {
-      font-size: 1.125rem;
-      font-weight: 700;
-      text-align: center;
-      flex: 1;
-      padding-right: 48px;
-    }
-    .hero {
-      padding: 0 1rem;
-    }
-    .hero-card {
-      width: 100%;
-      min-height: 240px;
-      border-radius: 0.75rem;
-      background: linear-gradient(135deg, #1e3a5f 0%, #0f172a 100%);
-      background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80');
-      background-size: cover;
-      background-position: center;
-      position: relative;
-      overflow: hidden;
-      box-shadow: 0 25px 50px -12px rgba(19, 109, 236, 0.15);
-    }
-    .hero-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(16, 24, 35, 0.9), transparent);
-    }
-    .hero-content {
-      position: relative;
-      padding: 1.5rem;
-      bottom: 0;
-    }
-    .hero-title {
-      color: white;
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-    }
-    .hero-subtitle {
-      color: #cbd5e1;
-      font-size: 1rem;
-    }
-    .form-container {
-      padding: 1.5rem 1rem;
-      max-width: 480px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .form-group { margin-bottom: 1rem; }
-    .form-label {
-      display: block;
-      color: var(--text-primary);
-      font-size: 0.875rem;
-      font-weight: 500;
-      margin-bottom: 0.5rem;
-      margin-left: 0.25rem;
-    }
-    .input-wrapper {
-      display: flex;
-      align-items: stretch;
-      border-radius: 0.5rem;
-      overflow: hidden;
-    }
-    .input-wrapper input {
-      flex: 1;
-      padding: 1rem;
-      border: 1px solid var(--border);
-      border-right: none;
-      border-radius: 0.5rem 0 0 0.5rem;
-      font-size: 1rem;
-      background: var(--white);
-      color: var(--text-primary);
-    }
-    .input-wrapper input:focus {
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(19, 109, 236, 0.2);
-    }
-    .input-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 1rem;
-      border: 1px solid var(--border);
-      border-left: none;
-      border-radius: 0 0.5rem 0.5rem 0;
-      background: var(--white);
-      color: var(--text-secondary);
-    }
-    .login-btn {
-      width: 100%;
-      padding: 1rem;
-      background: var(--primary);
-      color: white;
-      border: none;
-      border-radius: 0.5rem;
-      font-size: 1.125rem;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 0.5rem;
-      margin-top: 1.5rem;
-      box-shadow: 0 10px 15px -3px rgba(19, 109, 236, 0.2);
-      transition: background 0.2s;
-    }
-    .login-btn:hover { background: #1156c7; }
-    .version {
-      text-align: center;
-      margin-top: 2rem;
-      color: var(--text-secondary);
-      font-size: 0.75rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-weight: 600;
-    }
-    .footer {
-      margin-top: auto;
-      padding: 1.5rem;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      opacity: 0.5;
-    }
-    .footer-item {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      font-size: 0.625rem;
-      font-weight: 500;
-    }
-    .footer-item span:first-child { font-size: 1rem; }
-    @media (prefers-color-scheme: dark) {
-      body:not(.light) { background: var(--background-dark); color: var(--text-light); }
-      body:not(.light) .form-label { color: #cbd5e1; }
-      body:not(.light) .input-wrapper input,
-      body:not(.light) .input-icon { background: #1e293b; border-color: #334155; color: #f1f5f9; }
-    }
-  </style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>ESS Manager - Login</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+TC:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "primary": "#136dec",
+        "background-light": "#f6f7f8",
+        "background-dark": "#101822",
+      },
+      fontFamily: {
+        "display": ["Inter", "Noto Sans TC", "sans-serif"]
+      },
+      borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+    },
+  },
+}
+</script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;600;700&display=swap');
+
+body {
+  font-family: 'Inter', 'Noto Sans TC', sans-serif;
+  min-height: max(884px, 100dvh);
+}
+</style>
 </head>
-<body>
-<div class="container">
-  <div class="header">
-    <div class="logo-icon">
-      <span class="material-symbols-outlined">bolt</span>
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 min-h-screen flex flex-col">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark overflow-x-hidden">
+  <!-- Header -->
+  <div class="flex items-center p-4 pb-2 justify-between">
+    <div class="text-primary flex size-12 shrink-0 items-center justify-center">
+      <span class="material-symbols-outlined text-4xl" style="">bolt</span>
     </div>
-    <h2 class="company-name">台灣微網科技</h2>
-    <div style="width: 48px;"></div>
+    <h2 class="text-slate-900 dark:text-slate-100 text-lg font-bold leading-tight tracking-[-0.015em] flex-1 text-center pr-12" style="">台灣微網科技</h2>
   </div>
   
-  <div class="hero">
-    <div class="hero-card">
-      <div class="hero-overlay"></div>
-      <div class="hero-content">
-        <h2 class="hero-title">Welcome Back</h2>
-        <p class="hero-subtitle">Manage your energy storage efficiently</p>
+  <!-- Hero Section -->
+  <div class="@container px-4 py-6">
+    <div class="w-full bg-center bg-no-repeat bg-cover flex flex-col justify-end overflow-hidden rounded-xl min-h-[240px] shadow-2xl shadow-primary/10 relative" data-alt="High-tech professional photography of a large-scale industrial energy storage system with solar panels and digital grid overlays" style="background-image: url('https://images.unsplash.com/photo-1509391366360-2e959784a276?w=800&q=80');">
+      <div class="absolute inset-0 bg-gradient-to-t from-background-dark/90 to-transparent"></div>
+      <div class="relative p-6">
+        <h2 class="text-white tracking-tight text-[28px] font-bold leading-tight" style="">Welcome Back</h2>
+        <p class="text-slate-300 text-base font-normal leading-normal" style="">Manage your energy storage efficiently</p>
       </div>
     </div>
   </div>
   
-  <div class="form-container">
+  <!-- Login Form -->
+  <div class="flex flex-col gap-6 px-4 py-4 max-w-md mx-auto w-full">
     <form id="loginForm">
-      <div class="form-group">
-        <label class="form-label">帳號 (Username)</label>
-        <div class="input-wrapper">
-          <input type="text" id="username" placeholder="Enter your username" required/>
-          <div class="input-icon">
-            <span class="material-symbols-outlined">person</span>
+      <div class="flex flex-col gap-4">
+        <label class="flex flex-col w-full" style="">
+          <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2 ml-1" style="">帳號 (Username)</p>
+          <div class="flex w-full items-stretch rounded-lg group">
+            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-l-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 h-14 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-[15px] border-r-0 text-base font-normal leading-normal transition-all" placeholder="Enter your username" type="text" id="username" required=""/>
+            <div class="text-slate-400 dark:text-slate-500 flex border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 items-center justify-center px-4 rounded-r-lg border-l-0">
+              <span class="material-symbols-outlined" style="">person</span>
+            </div>
           </div>
-        </div>
+        </label>
+        
+        <label class="flex flex-col w-full" style="">
+          <p class="text-slate-700 dark:text-slate-300 text-sm font-medium leading-normal pb-2 ml-1" style="">密碼 (Password)</p>
+          <div class="flex w-full items-stretch rounded-lg group">
+            <input class="form-input flex w-full min-w-0 flex-1 resize-none overflow-hidden rounded-l-lg text-slate-900 dark:text-white focus:outline-0 focus:ring-2 focus:ring-primary/50 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 h-14 placeholder:text-slate-400 dark:placeholder:text-slate-500 p-[15px] border-r-0 text-base font-normal leading-normal transition-all" placeholder="Enter your password" type="password" id="password" required=""/>
+            <div class="text-slate-400 dark:text-slate-500 flex border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800/50 items-center justify-center px-4 rounded-r-lg border-l-0">
+              <span class="material-symbols-outlined" style="">lock</span>
+            </div>
+          </div>
+        </label>
       </div>
       
-      <div class="form-group">
-        <label class="form-label">密碼 (Password)</label>
-        <div class="input-wrapper">
-          <input type="password" id="password" placeholder="Enter your password" required/>
-          <div class="input-icon">
-            <span class="material-symbols-outlined">lock</span>
-          </div>
-        </div>
+      <div class="flex justify-end mt-2">
+        <a class="text-primary text-sm font-medium hover:underline" href="#" style=""></a>
       </div>
       
-      <button type="submit" class="login-btn">
-        <span>登入 (Login)</span>
-        <span class="material-symbols-outlined">login</span>
+      <button type="submit" class="w-full bg-primary hover:bg-primary/90 text-white font-bold py-4 rounded-lg shadow-lg shadow-primary/20 transition-all flex items-center justify-center gap-2 mt-6" style="">
+        <span class="text-lg" style="">登入 (Login)</span>
+        <span class="material-symbols-outlined" style="">login</span>
       </button>
     </form>
     
-    <p class="version">Energy Management System v2.4</p>
+    <div class="mt-4 text-center">
+      <p class="text-slate-500 dark:text-slate-400 text-xs uppercase tracking-widest font-semibold" style="">Energy Management System v2.4</p>
+    </div>
   </div>
   
-  <div class="footer">
-    <div class="footer-item">
-      <span class="material-symbols-outlined">security</span>
-      <span>SECURE END-TO-END</span>
+  <!-- Footer -->
+  <div class="mt-auto p-6 flex justify-center gap-8 opacity-50 grayscale">
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-sm" style="">security</span>
+      <span class="text-[10px] font-medium" style="">SECURE END-TO-END</span>
     </div>
-    <div class="footer-item">
-      <span class="material-symbols-outlined">cloud_done</span>
-      <span>REAL-TIME SYNC</span>
+    <div class="flex items-center gap-2">
+      <span class="material-symbols-outlined text-sm" style="">cloud_done</span>
+      <span class="text-[10px] font-medium" style="">REAL-TIME SYNC</span>
     </div>
   </div>
+  
+  <div class="h-4 bg-background-light dark:bg-background-dark"></div>
 </div>
 
 <script>
+  // Check system preference for dark mode
+  if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.documentElement.classList.add('dark');
+  }
+  
+  // Login form handler
   document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const username = document.getElementById('username').value;
     const password = document.getElementById('password').value;
     
+    // Demo credentials
     if (username === 'admin@taiwanmicrogrid.com' && password === 'Demo1234!') {
-      alert('登入成功！');
+      // Success - redirect to EMS
       window.location.href = 'https://ess-mobile.vercel.app';
     } else {
-      alert('帳號或密碼錯誤');
+      // Show error
+      alert('帳號或密碼錯誤\n\nDemo 帳號: admin@taiwanmicrogrid.com\nDemo 密碼: Demo1234!');
     }
   });
 </script>
